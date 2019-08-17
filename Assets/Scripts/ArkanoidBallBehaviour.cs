@@ -11,5 +11,14 @@ public class ArkanoidBallBehaviour : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().velocity = (Vector2.up + Vector2.right) * startSpeed; 
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("Colidiu com a parede ou com o paddle");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("======== Game Over ========");
+    }
+   
 
 }
