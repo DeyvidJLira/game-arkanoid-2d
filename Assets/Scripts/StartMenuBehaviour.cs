@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuBehaviour : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.anyKeyDown)
-            SceneManager.LoadScene("Scenes/MainGame");
+    public void playGame() {
+        SceneManager.LoadScene("Scenes/MainGame");
+    }
+
+    public void credits() {
+
     }
 }
