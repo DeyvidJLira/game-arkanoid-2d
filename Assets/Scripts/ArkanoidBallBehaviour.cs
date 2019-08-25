@@ -7,6 +7,8 @@ public class ArkanoidBallBehaviour : MonoBehaviour
 {
     public float startSpeed = 10f;
 
+    public GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +16,26 @@ public class ArkanoidBallBehaviour : MonoBehaviour
     }
     
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("Colidiu com a parede ou com o paddle");
+        if (collision.transform.tag == "Brick")
+            gameManager.increasePoints(10);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.tag == "GameOver")
-            SceneManager.LoadScene("Scenes/GameOver");
+        if (collision.transform.tag == "GameOver") {
+            gameManager.decreaseLife();            
+        }
     }
-   
+
+    public void restartPosition() {
+        transform.position = Vector2.zero;
+    }
+
+    public void initMovement() {
+        GetComponent<Rigidbody2D>().velocity = (Vector2.up + Vector2.right) * startSpeed;
+    }
+
+    public void stopMovement() {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
 
 }
