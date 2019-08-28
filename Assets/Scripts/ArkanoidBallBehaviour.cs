@@ -16,8 +16,39 @@ public class ArkanoidBallBehaviour : MonoBehaviour
     }
     
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.transform.tag == "Brick")
+        if (collision.transform.tag == "Brick") {
             gameManager.increasePoints(10);
+            GetComponent<Rigidbody2D>().velocity *= -1;
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            if (transform.position.y < collision.transform.position.y) {
+                velocity.y = -1 * startSpeed;
+            } else {
+                velocity.y = startSpeed;
+            }
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+        if (collision.transform.tag == "Paddle") {
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            velocity.y = startSpeed;
+            if (transform.position.x < collision.transform.position.x)
+                velocity.x = -1 * startSpeed;
+            else
+                velocity.x = startSpeed;
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+        if (collision.transform.tag == "Wall") {
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            if (transform.position.x < collision.transform.position.x)
+                velocity.x = -1 * startSpeed;
+            else
+                velocity.x = startSpeed;
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+        if (collision.transform.tag == "Ceiling") {
+            Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+            velocity.y = -1 * startSpeed;
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
