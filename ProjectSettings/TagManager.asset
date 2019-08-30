@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - GameOver
   - Star
+  - Ceiling
   layers:
   - Default
   - TransparentFX
